@@ -1,0 +1,4 @@
+module AndroidSwiftTrace [system] {
+    header "AndroidTrace.h"
+    link "android"
+}
