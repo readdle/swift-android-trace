@@ -21,7 +21,7 @@ Read [Android Native Trace](https://developer.android.com/ndk/guides/tracing.htm
  .....
  
  public func helloWorld() {
- 	beginSection("Hello")
+    beginSection("Hello")
     
     ....
     
