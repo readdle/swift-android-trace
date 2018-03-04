@@ -37,5 +37,5 @@ Read [Android Native Trace](https://developer.android.com/ndk/guides/tracing.htm
  
  ## License
 
-This project is licensed under the Apache 2.0 LICENSE - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the Apache 2.0 - see the [LICENSE.md](LICENSE.md) file for details
 
