@@ -5,6 +5,8 @@ C-wrapper for Android Trace utility (trace.h, systrace) for Swift.
 ## Getting started
 
 Read [Android Native Trace](https://developer.android.com/ndk/guides/tracing.html)
+This tool works only on Android API 23 and higher (in accordance with Tracing API).
+For Android API lower than 23 usage of tool doens't give any effect.
 
 ## Installation
 
