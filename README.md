@@ -34,3 +34,8 @@ Read [Android Native Trace](https://developer.android.com/ndk/guides/tracing.htm
  Run application. To get .html report run the next command and play with application:
  
  `python $ANDROID_NDK/platform-tools/systrace/systrace.py --time=<trace_duration_seconds> --app=<app_package> -o <output_dir> app`
+ 
+ ## License
+
+This project is licensed under the Apache 2.0 LICENSE - see the [LICENSE.md](LICENSE.md) file for details
+
