@@ -10,7 +10,7 @@ For Android API lower than 23 it doesn't give any effect.
 
 ## Installation
 
- .Package(url: "https://github.com/yuryybk/swift-android-trace.git", .branch("master"))
+ .Package(url: "https://github.com/yuryybk/swift-android-trace.git", from: "1.0.0")
  
 ## Usage
  
