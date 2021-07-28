@@ -27,56 +27,36 @@
 #include <sys/cdefs.h>
 #include <stdlib.h>
 #include <sys/system_properties.h>
-
-	/* No worry about multithreading, sdkVersion is constant for device */
-	static int sdkVersion = 0;
-	int getSdkVersion() {
-	   if (sdkVersion == 0) {
-	       char sdkVersionString[PROP_VALUE_MAX];
-	       __system_property_get("ro.build.version.sdk", sdkVersionString);
-	       sdkVersion = atoi(sdkVersionString);
-	       return sdkVersion;
-	   } else {
-	       return sdkVersion;
-	   }
-	};
 	
 
-	/**
-	 * Returns true if tracing is enabled. Use this signal to avoid expensive computation only necessary
-	 * when tracing is enabled.
-	 */
-	static inline bool isNativeTraceEnabled() {
-		if (getSdkVersion() >= 23) {
-			return ATrace_isEnabled();
-		} else {
-			return false;
-		}
-	}
-	/**
-	 * Writes a tracing message to indicate that the given section of code has begun. This call must be
-	 * followed by a corresponding call to endSection() on the same thread.
-	 *
-	 * Note: At this time the vertical bar character '|' and newline character '\n' are used internally
-	 * by the tracing mechanism. If sectionName contains these characters they will be replaced with a
-	 * space character in the trace.
-	 */
-	static inline bool beginNativeTraceSection(const char* sectionName) {
-		if (getSdkVersion() >= 23) {
-			ATrace_beginSection(sectionName);
-		}
-	}
+/**
+ * Returns true if tracing is enabled. Use this signal to avoid expensive computation only necessary
+ * when tracing is enabled.
+ */
+static inline bool isNativeTraceEnabled() {
+	return ATrace_isEnabled();
+}
 
-	/**
-	 * Writes a tracing message to indicate that a given section of code has ended. This call must be
-	 * preceeded by a corresponding call to beginSection(char*) on the same thread. Calling this method
-	 * will mark the end of the most recently begun section of code, so care must be taken to ensure
-	 * that beginSection / endSection pairs are properly nested and called from the same thread.
-	 */
-	static inline void endNativeTraceSection() {
-		if (getSdkVersion >= 23) {
-			ATrace_endSection();
-		}
-	}
+/**
+ * Writes a tracing message to indicate that the given section of code has begun. This call must be
+ * followed by a corresponding call to endSection() on the same thread.
+ *
+ * Note: At this time the vertical bar character '|' and newline character '\n' are used internally
+ * by the tracing mechanism. If sectionName contains these characters they will be replaced with a
+ * space character in the trace.
+ */
+static inline bool beginNativeTraceSection(const char* sectionName) {
+	ATrace_beginSection(sectionName);
+}
+
+/**
+ * Writes a tracing message to indicate that a given section of code has ended. This call must be
+ * preceeded by a corresponding call to beginSection(char*) on the same thread. Calling this method
+ * will mark the end of the most recently begun section of code, so care must be taken to ensure
+ * that beginSection / endSection pairs are properly nested and called from the same thread.
+ */
+static inline void endNativeTraceSection() {
+	ATrace_endSection();
+}
 	
 #endif // ANDROID_NATIVE_TRACE_H
