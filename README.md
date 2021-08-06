@@ -23,11 +23,11 @@ For Android API lower than 23 it doesn't give any effect.
  .....
  
  public func helloWorld() {
-    beginSection("Hello")
+    beginNativeTraceSection("Hello")
     
     ....
     
-    endSection()
+    endNativeTraceSection()
  }
  ```
  
