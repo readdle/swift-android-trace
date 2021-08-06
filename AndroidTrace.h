@@ -26,15 +26,21 @@
 #include <stdbool.h>
 #include <sys/cdefs.h>
 #include <stdlib.h>
+
+#if __ANDROID__
 #include <sys/system_properties.h>
-	
+#endif
 
 /**
  * Returns true if tracing is enabled. Use this signal to avoid expensive computation only necessary
  * when tracing is enabled.
  */
 static inline bool isNativeTraceEnabled() {
-	return ATrace_isEnabled();
+#if __ANDROID__
+    return ATrace_isEnabled();
+#else
+	return false;
+#endif
 }
 
 /**
@@ -46,7 +52,9 @@ static inline bool isNativeTraceEnabled() {
  * space character in the trace.
  */
 static inline bool beginNativeTraceSection(const char* sectionName) {
+#if __ANDROID__
 	ATrace_beginSection(sectionName);
+#endif
 }
 
 /**
@@ -56,7 +64,9 @@ static inline bool beginNativeTraceSection(const char* sectionName) {
  * that beginSection / endSection pairs are properly nested and called from the same thread.
  */
 static inline void endNativeTraceSection() {
+#if __ANDROID__
 	ATrace_endSection();
+#endif
 }
 	
 #endif // ANDROID_NATIVE_TRACE_H
